@@ -1,37 +1,36 @@
 console.log('cli-css');
 
-// Change the program to take the kind of conversion you want to do.
-    //if input is hex, convert to rgb
-    //else if input is rgb, convert to hex
+let convertToRgb = require('./hex2rgb.js');
+    console.log(convertToRgb);
 
-if (process.argv[2] == 'hex') {
-    //Create a function that converts from hex colors to rgb colors.
-    function hexToRgb(hex) {
-      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      } : null;
-    }
-console.log(hexToRgb(process.argv[3]));
-}
+let convertToHex = require('./rgb2hex.js');
+    console.log(convertToHex);
 
-else if (process.argv[2] == 'rgb') {
-    // Create the functionality to put in 3 number values and get out the hex color.
-    function componentToHex(c) {
-      var hex = c.toString(16);
-      return hex.length == 1 ? "0" + hex : hex;
-    }
+let convertToHsl = require('./hsl.js');
+    console.log(convertToHsl);
 
-    function rgbToHex(r, g, b) {
-      return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-    }
+switch (process.argv[2]) {
+    case `hex`:
+    let colorInput = process.argv[3];
+    console.log(convertToRgb.hexToRgb(colorInput));
+    console.log(convertToHsl.hexToHsl(colorInput));
+    break;
+    case `rgb`:
     let r = parseInt(process.argv[3]);
     let g = parseInt(process.argv[4]);
     let b = parseInt(process.argv[5]);
-    console.log(r);
-    console.log(g);
-    console.log(b);
-    console.log ( rgbToHex(r,g,b) );
+    console.log(convertToHex.rgbToHex(r,g,b));
+    console.log(convertToHsl.rgbToHsl(r,g,b));
+    break;
+    case `hsl`:
+    let h = parseInt(process.argv[3]);
+    let s = parseInt(process.argv[4]);
+    let l = parseInt(process.argv[5]);
+    console.log(convertToRgb.hslToRgb(h,s,l));
+    console.log(convertToHex.hslToHex(h,s,l));
+    break;
+    default:
+    console.log(`Not a valid input`);
 }
+
+
