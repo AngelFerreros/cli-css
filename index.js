@@ -9,8 +9,10 @@ const hexToRgb = hex =>
 
 console.log( `rgb (${hexToRgb(process.argv[3])})` );
 
-
-
 // Create the functionality to put in 3 number values and get out the hex color.
+const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')
 
+console.log(rgbToHex(255, 255, 255));
+
+// Change the program to take the kind of conversion you want to do.
 
